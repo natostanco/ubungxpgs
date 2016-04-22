@@ -43,7 +43,5 @@ cd nginx-${NGINX_VERSION}/
 --with-file-aio \
 --with-http_v2_module \
 --add-module=../ngx_pagespeed-release-${NPS_VERSION}-beta \
---with-cc-opt="-fPIC -I /usr/include/apr-1" \
---with-ld-opt="-luuid -lapr-1 -laprutil-1 -licudata -licuuc -L$pkgdir/usr/lib -lpng12 -lturbojpeg -ljpeg"
 make -j 4
 sudo cp objs/nginx /home/binginx/
