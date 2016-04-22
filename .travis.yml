@@ -5,7 +5,7 @@ before_install:
   - sudo apt-get update -q
   - export NPS_VERSION=`awk -f git-describe-remote-pgs.awk https://github.com/pagespeed/ngx_pagespeed  | grep -o "[0-9][^-]*" | head -n 1`
   - export NGINX_VERSION=`awk -f git-describe-remote-ngx.awk https://github.com/nginx/nginx  | grep -o "[0-9][^-]*" | head -n 1`
-script: #ngx pgs
+script: # pgs
   - export SAVE=$PWD
   - docker run -e NPS_VERSION=$NPS_VERSION -e NGINX_VERSION=$NGINX_VERSION -it -v ${PWD}:/home/binginx ubuntu sh /home/binginx/s.sh
 before_deploy: 
