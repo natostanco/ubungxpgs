@@ -9,16 +9,15 @@ before_install:
   grep -o "[0-9][^-]*" | head -n 1`
 script:
 - export SAVE=$PWD
-- docker run -e NPS_VERSION=$NPS_VERSION -e NGINX_VERSION=$NGINX_VERSION -it -v ${PWD}:/home/binginx
-  ubuntu sh /home/binginx/s.sh
+- docker run -e NPS_VERSION=$NPS_VERSION -e NGINX_VERSION=$NGINX_VERSION -it -v ${SAVE}:/home/binginx ubuntu sh /home/binginx/s.sh
 before_deploy:
 - cd
-- pwd
 - tar -czf nginx-${NGINX_VERSION}.tar.gz --directory="${SAVE}" nginx
 deploy:
   provider: releases
   api_key:
     secure: b7F1gTrDnssMtrAR3D4/SPDgDGpYEJkjO4yIF9+58pid4q7+oTlKiTAhWh7EysvW3nJrMiuUCDn5dpP8P55CKJKp+QtJ6YbcM4BKswq5DMGtk7XaqUjEfnDTQRkTOkQCvckme15+McapzVoHuBfKvktBk/LkttsuqmNpJ9gpqbwoGi6kDoTIXFcxZOF4Uo9gZxcio3QeJRXXSyVBbPinlmu/OY+EupPUA+4TmxKWbwGGj2eT9Pf/SKDzoe6Qsm6k34iUgS1pPnZcPcaXfm5PMi0xWH7PZ1fP0qlso/ZURMbgjFPUl0jHe6dyW4mBd1fa+09KXUN4oY291GLFlS/QlqznyKn9HPiQWQTEGsns6YLVoaGYBkWQYtoY0y58NgH8058I6uiHTbMVaG3A8xC0cvSrMShpwgfk8QiPJZ9tP5tR1210uvhl2ZCMhWuC1x6UcxwnW+iKV9GGc6g08WPmf+a3YLeFvMSyPXXQxZ8Z+y+zcJzeFPyVYWo+wYmxc84lI3D73/N/RcCdQtm54YjFr4wgTcoJbCKGmNPLU6NVXZW4yVmVTzOlJaU/ggJjmUZ6TuSO7Efvf9GuSJyb9Shy8ufLX0zX9MrLmZdBwrV8zfLGy8DqVsUUZ34gsp/Qb4+61trLlq3Q7eQuwJ/WAgSi7KrkBG5hrcFR7REzNl5IyxU=
-  file: ''
+  file: nginx-${NGINX_VERSION}.tar.gz
+  skip_cleanup: true
   on:
-    repo: natostanco/ubungxpgs
+    tags: true
