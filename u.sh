@@ -42,6 +42,6 @@ cd nginx-${NGINX_VERSION}/
 --with-mail_ssl_module \
 --with-file-aio \
 --with-http_v2_module \
---add-module=../ngx_pagespeed-release-${NPS_VERSION}-beta \
+--add-module=../ngx_pagespeed-release-${NPS_VERSION}-beta
 make -j 4
 sudo cp objs/nginx /home/binginx/
