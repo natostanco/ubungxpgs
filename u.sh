@@ -42,7 +42,9 @@ cd nginx-${NGINX_VERSION}/
 --with-mail_ssl_module \
 --with-file-aio \
 --with-http_v2_module \
+--with-cc-opt="-flto -Os -ffast-math -ffunction-sections -fdata-sections" \
+--with-ld-opt="-Wl,--gc-sections" \
 --add-module=../ngx_pagespeed-release-${NPS_VERSION}-beta
-make -j 4 BUILD=release CFLAGS="-D_GNU_SOURCE -Os -ffunction-sections -fdata-sections -fno-exceptions -Wl,--gc-sections -march=native" CXXFLAGS="-D_GNU_SOURCE -Os -ffunction-sections -fdata-sections -fno-exceptions -Wl,--gc-sections -march=native"
+make -j 4 
 strip -s -R .comment -R .gnu.version --strip-unneeded objs/nginx
 sudo cp objs/nginx /home/binginx/
