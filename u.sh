@@ -43,5 +43,6 @@ cd nginx-${NGINX_VERSION}/
 --with-file-aio \
 --with-http_v2_module \
 --add-module=../ngx_pagespeed-release-${NPS_VERSION}-beta
-make -j 4
+make -j 4 BUILD=release CFLAGS="-D_GNU_SOURCE -Os -ffunction-sections -fdata-sections -fno-exceptions -Wl,--gc-sections -march=native" CXXFLAGS="-D_GNU_SOURCE -Os -ffunction-sections -fdata-sections -fno-exceptions -Wl,--gc-sections -march=native"
+strip -s -R .comment -R .gnu.version --strip-unneeded
 sudo cp objs/nginx /home/binginx/
